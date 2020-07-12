@@ -1,0 +1,57 @@
+* {
+    background-color: black;
+}
+
+h1 {
+    text-transform: uppercase;
+    color: greenyellow;
+    text-align: center;
+    font-size: 100px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+table {
+    border: white 2px solid;
+}
+
+td {
+    height: 20px;
+    width: 20px;
+    background-color: black;
+    border: white 1px solid;
+}
+
+.field {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button-box {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+    flex-wrap: nowrap;
+    align-content: center;
+}
+.button {
+    width: 70px;
+    height: 70px;
+    margin: 0 5px;
+    border: white solid 2px;
+    color: white;
+    text-transform: uppercase;
+}
+
+.button:hover {
+    background-color: tomato;
+    color: white;
+    border: none;
+}
+
+.score_panel {
+    color: white;
+    text-align: center;
+}
