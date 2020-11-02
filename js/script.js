@@ -6,16 +6,59 @@ let snake = [0, 1, 2],
      snake.forEach(element => {
          document.getElementById('' + element).style.backgroundColor = 'green';
      });
+     document.getElementById('' + snake[snake.length - 1]).style.backgroundColor = '#6E420D';
  };
 
- snakeMove = (id) => {
-    snake.push(id);
+ snakeBody();
+
+ function moveUp() {
+    appleCheck();
+    if (snake[snake.length - 1] < 10) {
+        snake.push(snake[snake.length - 1] + 90);
+    } else {
+        snake.push(snake[snake.length - 1] - 10);
+    }
+    snakeBody();
+    gameOver();
  };
 
- gameOver = () => {
+ function moveDown() {
+    appleCheck();
+    if (snake[snake.length - 1] >= 90) {
+        snake.push(snake[snake.length - 1] - 90);
+    } else {
+        snake.push(snake[snake.length - 1] + 10);
+    }
+    snakeBody();
+    gameOver();
+ };
+
+ function moveLeft() {
+    appleCheck();
+    if (snake[snake.length - 1] % 10 < 1) {
+        snake.push(snake[snake.length - 1] + 9);
+    } else {
+        snake.push(snake[snake.length - 1] - 1);
+    }
+    snakeBody();
+    gameOver();
+ };
+
+ function moveRight() {
+    appleCheck();
+    if (snake[snake.length - 1] % 10 > 8) {
+        snake.push(snake[snake.length - 1] - 9);
+    } else {
+        snake.push(snake[snake.length - 1] + 1);
+    }
+    snakeBody();
+    gameOver();
+ };
+
+ function gameOver() {
     for (let i = 0; i < snake.length - 1; i++) {
         if (snake[snake.length - 1] == snake[i]) {
-            alert('Игра окончена, ваш рекорд: ' + score);
+            alert(`Игра окончена, ваш рекорд: ${score}`);
             snake = [0, 1, 2];
             score = 0;
             for (let j = 0; j < 100; j++) {
@@ -24,52 +67,28 @@ let snake = [0, 1, 2],
             appleRandomPlace();
         } 
         if(snake.length == 100) {
-            alert('Вы победили!');
+            alert(`Вы победили!`);
+            snake = [0, 1, 2];
+            score = 0;
         }
     }
+    snakeBody();
+    document.querySelector('.score').textContent = score;
     return(snake, score);
  };
 
- appleRandomPlace = () => {
-     appleId = Math.ceil(Math.random() * 100); 
-     for (let i = 0; i < snake.length; i++) {
-        if (appleId == snake[i]) {
+ function appleRandomPlace() {
+    appleId = Math.floor(Math.random() * 100);
+    snake.forEach(item => {
+        if (item == appleId) {
             appleRandomPlace();
         }
-    }
-     document.getElementById('' + appleId).style.backgroundColor = 'red';
-     return(appleId);
- }
+    })
+    document.getElementById('' + appleId).style.backgroundColor = 'red';
+         
+ };
 
- moveUp = () => {
-    if(id < 10) {
-        id += 90 ;
-    } else {
-        id -= 10;
-    }
- }
- moveDown = () => {
-    if(id >= 90) {
-        id -= 90;
-    } else {
-        id += 10;
-    }
- }
- moveLeft = () => {
-    if (id % 10 <= 0) {
-        id += 9;
-    } else {
-        id--;
-    }
- }
- moveRight = () => {
-    if (id % 10 >= 9) {
-        id -= 9;
-    } else {
-        id++;
-    }
- }
- appleCheck = () => {
+ function appleCheck() {
     if (snake[snake.length - 1] == appleId) {
         document.getElementById('' + appleId).style.backgroundColor = 'black';
         appleRandomPlace();
@@ -80,24 +99,19 @@ let snake = [0, 1, 2],
     }
  }
 
-document.querySelectorAll('.button').forEach(btn => {
-    btn.addEventListener('click', function() {
-        appleCheck();
-        id = snake[snake.length - 1];
-        if(this.value == 'up') {
-            moveUp();
-        } else if (this.value == 'down') {
-            moveDown();
-        }else if (this.value == 'left') {
-            moveLeft();
-        }else if (this.value == 'right') {
-            moveRight();
-        }
-        snakeMove(id);
-        gameOver();
-        snakeBody();
-    })
-})
+ appleRandomPlace();
 
-snakeBody();
-appleRandomPlace();
+ window.addEventListener('keydown', (e) => {
+    if (e.keyCode == 38) {
+        moveUp();
+    }
+    if (e.keyCode == 40) {
+        moveDown();
+    }
+    if (e.keyCode == 37) {
+        moveLeft();
+    }
+    if (e.keyCode == 39) {
+        moveRight();
+    }
+ });

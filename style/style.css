@@ -17,8 +17,8 @@ table {
 }
 
 td {
-    height: 20px;
-    width: 20px;
+    height: 25px;
+    width: 25px;
     background-color: black;
     border: white 1px solid;
 }
@@ -29,29 +29,9 @@ td {
     align-items: center;
 }
 
-.button-box {
-    display: flex;
-    justify-content: center;
-    margin-top: 40px;
-    flex-wrap: nowrap;
-    align-content: center;
-}
-.button {
-    width: 70px;
-    height: 70px;
-    margin: 0 5px;
-    border: white solid 2px;
-    color: white;
-    text-transform: uppercase;
-}
-
-.button:hover {
-    background-color: tomato;
-    color: white;
-    border: none;
-}
-
 .score_panel {
     color: white;
     text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    text-transform: uppercase;
 }
