@@ -55,21 +55,26 @@ let snake = [0, 1, 2],
     gameOver();
  };
 
+ function clearBoard() {
+    for (let j = 0; j < 100; j++) {
+        document.getElementById('' + j).style.backgroundColor = 'black';
+    }
+ }
+
  function gameOver() {
     for (let i = 0; i < snake.length - 1; i++) {
         if (snake[snake.length - 1] == snake[i]) {
             alert(`Игра окончена, ваш рекорд: ${score}`);
             snake = [0, 1, 2];
             score = 0;
-            for (let j = 0; j < 100; j++) {
-                document.getElementById('' + j).style.backgroundColor = 'black';
-            }
+            clearBoard();
             appleRandomPlace();
         } 
         if(snake.length == 100) {
             alert(`Вы победили!`);
             snake = [0, 1, 2];
             score = 0;
+            clearBoard();
         }
     }
     snakeBody();
